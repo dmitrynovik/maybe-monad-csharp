@@ -47,7 +47,7 @@ namespace MaybeMonad.Test
         public Maybe<Employee> GetSupervisorOf(int employeeId)
         {
             return Get(employeeId)
-                .FlatMap(employee => Get(employee.SupervisorId.GetValue()));
+                .FlatMap(employee => Get(employee.SupervisorId));
         }
     }
 }

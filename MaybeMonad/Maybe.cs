@@ -36,5 +36,7 @@ namespace MaybeMonad
         }
 
         public override int GetHashCode() => Equals(default, _value) ? 0 : _value.GetHashCode();
+
+        public static implicit operator T(Maybe<T> maybe) => maybe._value;
     }
 }
