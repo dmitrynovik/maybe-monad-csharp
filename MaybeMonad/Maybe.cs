@@ -22,9 +22,11 @@ namespace MaybeMonad
 
         public T GetOrElse(T defaultValue) => Equals(default, _value) ? defaultValue : _value;
 
-        public Maybe<R> Map<R>(Func<Maybe<T>, R> f) => Equals(default, _value) ? Maybe<R>.None() : Maybe<R>.Some(f(this));
+        public T GetValue() => _value;
 
-        public Maybe<R> FlatMap<R>(Func<Maybe<T>, Maybe<R>> f) => Equals(default, _value) ? Maybe<R>.None() : f(this);
+        public Maybe<R> Map<R>(Func<T, R> f) => Equals(default, _value) ? Maybe<R>.None() : Maybe<R>.Some(f(_value));
+
+        public Maybe<R> FlatMap<R>(Func<T, Maybe<R>> f) => Equals(default, _value) ? Maybe<R>.None() : f(_value);
 
         public override string ToString() => Equals(default, _value) ? "None" : $"Some<{_value}>";
 
